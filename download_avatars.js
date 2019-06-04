@@ -43,15 +43,16 @@ function downloadImageByURL(url, filepath) {
 }
 
 getRepoContributors(repoOwner, repoName, function(err, result) {
-  if(err){
-  console.log("Errors:", err);
-  } else {
-  for(contributor of result){
+  if(!err && repoOwner && repoName){
+    for(contributor of result){
   // console.log(contributor.avatars);
-  downloadImageByURL(contributor.avatar_url, "./avatars/"+ contributor.login + ".png" )
-  }// console.log("Result:", result);
-  }
-});
+      downloadImageByURL(contributor.avatar_url, "./avatars/"+ contributor.login + ".png" )
+    }
+    }else {
+      console.log("Errors:", err);
+    }
+  // console.log("Result:", result);
+  });
 
   // downloadImageByURL(result.avatar_url, "./avatars/"+ result.login + ".jpg" )
 
